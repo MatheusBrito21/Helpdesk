@@ -22,10 +22,10 @@ public class Chamado implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonFormat(pattern = "dd/mm/yyyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataAbertura = LocalDate.now();
 	
-	@JsonFormat(pattern = "dd/mm/yyyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
 	private Prioridade prioridade;
 	private Status status;
@@ -40,6 +40,12 @@ public class Chamado implements Serializable {
 	@JoinColumn(name ="cliente_id")
 	private Cliente cliente;
 	
+	
+	
+	public Chamado() {
+		super();
+	}
+
 	public Chamado(Integer id, Prioridade prioridade, Status status, String observacoes, String titulo, Tecnico tecnico,
 			Cliente cliente) {
 		super();
