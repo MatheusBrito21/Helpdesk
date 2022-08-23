@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.matt.helpdesk.domain.Tecnico;
+import com.matt.helpdesk.domain.enums.Perfil;
 /**
  * Essa classe sera utilizada em TecnicoResource
  * para receber o objeto Tecnico, de forma que o 
@@ -83,8 +84,8 @@ public class TecnicoDTO implements Serializable {
 		this.senha = senha;
 	}
 
-	public Set<Integer> getPerfis() {
-		return perfis;
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
 	public void setPerfis(Set<Integer> perfis) {
