@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.matt.helpdesk.domain.Tecnico;
+import com.matt.helpdesk.domain.dtos.TecnicoDTO;
 import com.matt.helpdesk.services.TecnicoService;
 
 @RestController
@@ -19,9 +20,9 @@ public class TecnicoResource {
 	
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Tecnico> obterPorId(@PathVariable Integer id){
+	public ResponseEntity<TecnicoDTO> obterPorId(@PathVariable Integer id){
 		Tecnico tecnico = service.obterPorId(id);
-		return ResponseEntity.ok().body(tecnico);
+		return ResponseEntity.ok().body(new TecnicoDTO(tecnico));
 		
 	}
 		
