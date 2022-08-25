@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +44,7 @@ public class TecnicoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TecnicoDTO> addTecnico(@RequestBody TecnicoDTO objDTO){
+	public ResponseEntity<TecnicoDTO> addTecnico(@Valid @RequestBody TecnicoDTO objDTO){
 		Tecnico novoTec = service.addTecnico(objDTO);
 		//retorna na url o id do objeto criado
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novoTec.getId()).toUri();
