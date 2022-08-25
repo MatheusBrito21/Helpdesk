@@ -16,6 +16,8 @@ import com.matt.helpdesk.repositories.TecnicoRepository;
 import com.matt.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.matt.helpdesk.services.exceptions.ObjectNotFoundException;
 
+import net.bytebuddy.implementation.bytecode.Throw;
+
 @Service
 public class TecnicoService {
 	
@@ -48,7 +50,15 @@ public class TecnicoService {
 		updateTec = new Tecnico(objDTO);
 		return tecnicoRepository.save(updateTec);
 	}
-
+	
+	public void deletarPorId(Integer id) {
+		Tecnico obj = obterPorId(id);
+		if(obj.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("O tecnico possui chamados abertos e nao pode ser deletado");
+		}
+		tecnicoRepository.deleteById(id);
+	}
+	
 	private void validaCPFeEmail(TecnicoDTO objDTO) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
 		if(obj.isPresent() && obj.get().getId()!= objDTO.getId()) {
@@ -60,5 +70,8 @@ public class TecnicoService {
 			throw new DataIntegrityViolationException("Email já cadastrado no sistema.");
 		}
 	}
+
+	
+
 
 }
