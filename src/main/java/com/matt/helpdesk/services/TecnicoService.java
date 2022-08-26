@@ -16,8 +16,6 @@ import com.matt.helpdesk.repositories.TecnicoRepository;
 import com.matt.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.matt.helpdesk.services.exceptions.ObjectNotFoundException;
 
-import net.bytebuddy.implementation.bytecode.Throw;
-
 @Service
 public class TecnicoService {
 	
