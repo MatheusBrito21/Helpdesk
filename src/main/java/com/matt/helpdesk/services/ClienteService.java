@@ -40,6 +40,14 @@ public class ClienteService {
 		Cliente novoCliente = new Cliente(objDTO);
 		return clienteRepository.save(novoCliente);
 	}
+	
+	public Cliente updateCliente(Integer id, @Valid ClienteDTO objDTO) {
+		objDTO.setId(id);
+		Cliente update = obterPorId(id);
+		validaCPFeEmail(objDTO);
+		update = new Cliente(objDTO);
+		return clienteRepository.save(update);
+	}
 
 	private void validaCPFeEmail(@Valid ClienteDTO objDTO) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
@@ -51,6 +59,16 @@ public class ClienteService {
 			throw new DataIntegrityViolationException("Email já cadastrado!");
 		}
 	}
+
+	public void deletarPorId(Integer id) {
+		Cliente clienteDel = obterPorId(id);
+		if(clienteDel.getChamados().size()>0) {
+			throw new DataIntegrityViolationException("O cliente possui chamados em aberto!");
+		}
+		clienteRepository.deleteById(id);
+	}
+
+
 	
 	
 	

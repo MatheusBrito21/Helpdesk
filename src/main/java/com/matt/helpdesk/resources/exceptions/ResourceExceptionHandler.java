@@ -29,7 +29,7 @@ public class ResourceExceptionHandler {
 	}
 	
 	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ResponseEntity<StandardError> cpfCadastrado(DataIntegrityViolationException ex, 
+	public ResponseEntity<StandardError> violacaoDeDados(DataIntegrityViolationException ex, 
 			HttpServletRequest request){
 		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
 				"Violação de Dados!", ex.getMessage(), request.getRequestURI());
