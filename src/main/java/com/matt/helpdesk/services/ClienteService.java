@@ -46,6 +46,7 @@ public class ClienteService {
 		Cliente update = obterPorId(id);
 		validaCPFeEmail(objDTO);
 		update = new Cliente(objDTO);
+		update.setDataCriacao(objDTO.getDataCriacao());
 		return clienteRepository.save(update);
 	}
 

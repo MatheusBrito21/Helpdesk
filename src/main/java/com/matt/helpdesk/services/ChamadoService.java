@@ -1,5 +1,6 @@
 package com.matt.helpdesk.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +41,13 @@ public class ChamadoService {
 		return chamadoRepository.save(novoChamado(objDTO));
 	}
 	
+	public Chamado updateChamado(Integer id, @Valid ChamadoDTO objDTO) {
+		objDTO.setId(id);
+		Chamado chamado = obterPorId(id);
+		chamado = novoChamado(objDTO);
+		return chamadoRepository.save(chamado);
+	}
+	
 	private Chamado novoChamado(ChamadoDTO obj) {
 		Tecnico tec = tecnicoService.obterPorId(obj.getTecnico());
 		Cliente cli = clienteService.obterPorId(obj.getCliente());
@@ -49,14 +57,21 @@ public class ChamadoService {
 			chamado.setId(obj.getId());
 		}
 		
+		if(obj.getStatus().equals(2)) {
+			chamado.setDataFechamento(LocalDate.now());
+		}
+		
 		chamado.setTitulo(obj.getTitulo());
 		chamado.setPrioridade(Prioridade.toEnum(obj.getPrioridade()));
 		chamado.setStatus(Status.toEnum(obj.getStatus()));
 		chamado.setObservacoes(obj.getObservacoes());
+		chamado.setDataAbertura(obj.getDataAbertura());
 		chamado.setCliente(cli);
 		chamado.setTecnico(tec);
 		
 		return chamado;
 	}
+
+	
 
 }
