@@ -21,7 +21,7 @@ public class Tecnico extends Pessoa{
 
 	public Tecnico() {
 		super();
-		addPerfil(Perfil.CLIENTE);
+		addPerfil(Perfil.TECNICO);
 	}
 	
 	//Construtor de tecnicoDTO para auxiliar no metodo de criacao de um novo tecnico
@@ -34,7 +34,7 @@ public class Tecnico extends Pessoa{
 		this.senha = tecnico.getSenha();
 		this.perfis = tecnico.getPerfis().stream().map(x -> x.getCod()).collect(Collectors.toSet());
 		this.dataCriacao = tecnico.getDataCriacao();
-		addPerfil(Perfil.CLIENTE);
+		addPerfil(Perfil.TECNICO);
 	}
 
 	public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
