@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET,"/cliente").hasAnyAuthority(Perfil.TECNICO.getDescricao(),Perfil.CLIENTE.getDescricao())	
 //		.antMatchers(HttpMethod.POST, "/cliente").hasAnyAuthority(Perfil.TECNICO.getDescricao())
 		.anyRequest().authenticated();
+//		.anyRequest().permitAll();
 		
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
