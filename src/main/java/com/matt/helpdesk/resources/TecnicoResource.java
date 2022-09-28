@@ -46,7 +46,7 @@ public class TecnicoResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
+//	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<TecnicoDTO> addTecnico(@Valid @RequestBody TecnicoDTO objDTO){
 		Tecnico novoTec = service.addTecnico(objDTO);

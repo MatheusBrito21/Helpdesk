@@ -1,5 +1,6 @@
 package com.matt.helpdesk.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +41,7 @@ public class TecnicoService {
 
 	public Tecnico addTecnico(TecnicoDTO objDTO) {
 		objDTO.setId(null);
+		objDTO.setDataCriacao(LocalDate.now());
 		objDTO.setSenha(encoder.encode(objDTO.getSenha()));
 		validaCPFeEmail(objDTO);
 		Tecnico tec = new Tecnico(objDTO);
